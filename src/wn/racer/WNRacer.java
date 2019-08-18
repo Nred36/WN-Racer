@@ -15,7 +15,9 @@ public class WNRacer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        //SPEED RACER
+        System.out.println("You win");
+        
     }
     
 }
