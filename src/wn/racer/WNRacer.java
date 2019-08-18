@@ -18,7 +18,7 @@ public class WNRacer {
         //SPEED RACER
         System.out.println("You win");
         
-        System.out.println("Nathan");
+        System.out.println("Will Loses");
         
         // making a change
         
