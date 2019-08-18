@@ -16,7 +16,7 @@ public class WNRacer {
      */
     public static void main(String[] args) {
         //SPEED RACER
-        System.out.println("Nathan win");
+        System.out.println("Nat win");
         
         System.out.println("Will Loses");
         
