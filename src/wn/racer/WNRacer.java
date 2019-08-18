@@ -18,6 +18,8 @@ public class WNRacer {
         //SPEED RACER
         System.out.println("You win");
         
+        System.out.println("Nathan");
+        
     }
     
 }
