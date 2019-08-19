@@ -16,6 +16,7 @@ public class Player {
     static int posx;
     static int posy;
     static int health;
+    static int currSpeed;
     
     public Player(){
         health = 100;
