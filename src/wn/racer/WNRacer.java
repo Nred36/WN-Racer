@@ -40,8 +40,9 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
     private Graphics dbg;
     Timer timer;
 
-    int mX, mY, strips = 6,ticksR = 0;
+    int mX, mY, strips = 6,ticksR = 0, px = 700, py= 500;
     int [] roadi = new int[strips];
+    int press[] = {0, 0, 0, 0};
 
     public WNRacer() {//program name
         for(int i = 0; i < strips; i++){
@@ -49,7 +50,9 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
             if(i>0){
                 roadi[i]=roadi[i-1]+175;
             }
-        }
+        }       
+        
+        System.out.println(py+"dd");
         
         timer = new Timer(16, this);
         timer.setInitialDelay(100);     //starts timer
@@ -120,6 +123,21 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
         myPic.setColor(Color.cyan);
         myPic.fillRect(0, 0, getWidth(), getHeight()/11);
         
+        
+        //PLAYER
+        myPic.fillRect(px, py, 60, 100);      
+        
+            if(press[0]==1){
+                px--;
+            }else if(press[1]==1){
+                px++;
+            }
+            if(press[2]==1){
+                py--;
+            }else if(press[3]==1){
+                py++;
+            }    
+        
     }
 
     @Override
@@ -135,25 +153,31 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
-        //key presses
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            //runs if escape is pressed
-            try {
-                FileWriter fw = new FileWriter("save.txt");//set place to write to in "Files"
-                PrintWriter pw = new PrintWriter(fw); //starts writing
-                //pw.println();
-                System.out.println("Saved");//it worked
-                pw.close(); //stop writing
-            } catch (IOException a) {
-                System.out.println("ERROR");//it didnt work
-            }
+     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
+            press[0] = 1;
+        } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            press[1] = 1;
         }
-    }
+        if (press[2] == 0 && (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP)) {
+            press[2] = 1;           
+        } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
+            press[3] = 1;
+        } 
+        }    
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) { // if the a key or the left arrow key is pressed
+            press[0] = 0; // set the 
+        } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            press[1] = 0;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
+            press[2] = 0;            
+        }else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
+            press[3] = 0;
+        }
     }
 
     @Override
