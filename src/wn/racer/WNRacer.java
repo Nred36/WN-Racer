@@ -27,7 +27,7 @@ import javax.swing.JApplet;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-public class WNRacer extends JApplet implements ActionListener, KeyListener, MouseMotionListener, MouseWheelListener, MouseListener {
+public class WNRacer extends JApplet implements ActionListener, KeyListener {
     static JFrame f = new JFrame("");
     Drawing d = new Drawing();
     Graphics2D myPic;
@@ -51,25 +51,18 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
                
         
         timer = new Timer(16, this);
-        timer.setInitialDelay(100);     //starts timer
+        timer.setInitialDelay(100);     // probably delays the program for 0.1 seconds
         timer.start();
-        Timer timer = new Timer(2000, new ActionListener() {
+        
+        // This commented out code has code where something can be executed every 2 seconds or so if wanted
+/*        Timer timer = new Timer(2000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //this will run every 2 seconds
             }
-        });
-        try {//READ
-            FileReader fr = new FileReader("save.txt"); //reads from text file (located in "files"
-            BufferedReader br = new BufferedReader(fr);
-            //map[c] = Integer.parseInt(br.readLine());            
-        } catch (IOException a) {
-            System.out.println("Couldn't Load");//if it fails
-        }
+        });*/
+
         addKeyListener(this);
-        addMouseWheelListener(this);
-        addMouseMotionListener(this);
-        addMouseListener(this);
     }
 
     public static void main(String[] args) {
@@ -184,47 +177,4 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
             press[3] = 0;
         }
     }
-
-    @Override
-    public void mouseWheelMoved(MouseWheelEvent e) {
-        /* if (zoom < 3 && e.getPreciseWheelRotation() < 0) {
-            zoom++;
-        } else if (zoom > 1 && e.getPreciseWheelRotation() > 0) {
-            zoom--;
-        }*/
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        mX = e.getX();
-        mY = e.getY();
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        mX = e.getX();
-        mY = e.getY();
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
 }
