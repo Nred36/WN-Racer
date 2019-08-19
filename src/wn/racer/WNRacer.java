@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wn.racer;//package name
 
 import java.awt.Color;
@@ -33,7 +28,6 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 public class WNRacer extends JApplet implements ActionListener, KeyListener, MouseMotionListener, MouseWheelListener, MouseListener {
-
     static JFrame f = new JFrame("");
     Drawing d = new Drawing();
     Graphics2D myPic;
@@ -42,7 +36,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
     Timer timer;
     Player player = new Player();
 
-    int mX, mY, strips = 6,ticksR = 0, px = 700, py= 500;
+    int mX, mY, strips = 6,ticksR = 0, px = 900, py= 700;
     int [] roadi = new int[strips];
     int press[] = {0, 0, 0, 0};
     double rotation = 0;
@@ -140,10 +134,8 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
         
             if(press[0]==1){
                 px--;               
-                rotation -= 0.001;
             }else if(press[1]==1){
                 px++;
-                rotation += 0.001;
             }
             if(press[2]==1){
                 py--;
