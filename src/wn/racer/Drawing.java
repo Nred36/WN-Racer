@@ -38,12 +38,12 @@ public class Drawing extends Canvas {
         Polygon p = new Polygon();
         Scaling s = new Scaling();
         
-        if (t == 0){
+        if (t == 0){  //For the Road its self
             p.addPoint(0,y);
             p.addPoint(x/3, y/11);
             p.addPoint(x - x/3, y/11);
             p.addPoint(x, y);
-        }else if(t == 1){
+        }else if(t == 1){ //For drawing the strips
             int w=15, h = 45;
             
             w = s.getS(y);

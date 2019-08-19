@@ -97,30 +97,30 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
     public void paintComponent(Graphics g) {
         myPic = (Graphics2D) g;      
        
-        myPic.setColor(new Color(255,248,220));
+        myPic.setColor(new Color(255,248,220)); //Sand
         myPic.fillRect(0,0,getWidth(),getHeight());
         
-        myPic.setColor(Color.lightGray);
+        myPic.setColor(Color.lightGray); //Road
         myPic.fillPolygon(d.poly(getWidth(),getHeight(),0));
         
         
-        for(int i = 0; i < strips; i++){            
+        for(int i = 0; i < strips; i++){ //Road Lines
             myPic.setColor(Color.yellow);
             myPic.fillPolygon(d.poly(getWidth()/2, roadi[i],1));
             myPic.setColor(Color.black);
             myPic.drawPolygon(d.poly(getWidth()/2, roadi[i],1));
             if(roadi[i]<1500){                
                 roadi[i]+=roadi[i]/50;                
-            }else if(roadi[i]>1500 && ticksR>30){
+            }else if(roadi[i]>1500 && ticksR>30){ //If the strip is off the screen and a new one hasnt spawned in 30 frames, spawn one
               roadi[i]=getHeight()/11;
               ticksR=0;
             }
-            if(i==0){
+            if(i==0){ //Only increase the frame count on the first of the array
                 ticksR++;
             }
         }
         
-        myPic.setColor(Color.cyan);
+        myPic.setColor(Color.cyan); //Drawing Sky
         myPic.fillRect(0, 0, getWidth(), getHeight()/11);
         
         
