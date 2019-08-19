@@ -39,6 +39,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     int mX, mY, strips = 6,ticksR = 0, px = 900, py= 700;
     int [] roadi = new int[strips];
     int press[] = {0, 0, 0, 0};
+    
 
     public WNRacer() {//program name
         for(int i = 0; i < strips; i++){
@@ -99,7 +100,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
             myPic.setColor(Color.black);
             myPic.drawPolygon(d.poly(getWidth()/2, roadi[i],1));
             if(roadi[i]<1500){                
-                roadi[i]+=roadi[i]/ player.currSpeed; //Base on Player Speed          
+                roadi[i]+=roadi[i] / player.currSpeed; //Base on Player Speed          
             }else if(roadi[i]>1500 && ticksR>player.currSpeed){ //If the strip is off the screen and a new one hasnt spawned in 30 frames, spawn one
               roadi[i]=getHeight()/11;
               ticksR=0;
@@ -112,24 +113,24 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         
         myPic.setColor(Color.cyan); //Drawing Sky
         myPic.fillRect(0, 0, getWidth(), getHeight()/11);
-
-        
         
         //PLAYER
         myPic.fillRect(px, py, 60, 100);      
         
         
-            if(press[0]==1){
-                px--;               
-            }else if(press[1]==1){
-                px++;
-            }
-            if(press[2]==1){
-                py--;
-            }else if(press[3]==1){
-                py++;
-            }    
-        
+        if(press[0]==1){
+            // move the bike to the left     
+        }
+        else if(press[1]==1){
+            // move the bike to the right
+        }
+        if(press[2]==1){
+            player.currSpeed++;
+        }
+        if(press[3]==1){
+            player.currSpeed--;
+        }
+
     }
 
     @Override
