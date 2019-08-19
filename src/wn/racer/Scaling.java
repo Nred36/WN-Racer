@@ -7,11 +7,11 @@ package wn.racer;
 
 /**
  *
- * @author Will Pringle
+ * @author Nred
  */
-public class newclass {
-    
-    
-    // making a new class
-    
+public class Scaling {
+    public int getS(int y){
+        
+        return (((y-60) *30)/421); //function returns returns width when given the height on the screen
+    }   
 }
