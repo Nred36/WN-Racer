@@ -13,10 +13,11 @@ public class Player {
     
     static int maxSpeed;
     static int minSpeed;
+    static int health;
     static int posx;
     static int posy;
-    static int health;
     static int currSpeed;
+    static int direction; // -42 to pos 42
     
     public Player(){
         health = 100;

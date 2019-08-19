@@ -39,7 +39,6 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     int mX, mY, strips = 6,ticksR = 0, px = 900, py= 700;
     int [] roadi = new int[strips];
     int press[] = {0, 0, 0, 0};
-    double rotation = 0;
 
     public WNRacer() {//program name
         for(int i = 0; i < strips; i++){
@@ -85,10 +84,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
 
     public void paintComponent(Graphics g) {
         myPic = (Graphics2D) g;      
-        AffineTransform old = myPic.getTransform();
-        
-        myPic.rotate(rotation, getWidth(),getHeight()); //Rotate
-        
+
         
         myPic.setColor(new Color(255,248,220)); //Sand
         myPic.fillRect(0,0,getWidth(),getHeight());
@@ -116,9 +112,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         
         myPic.setColor(Color.cyan); //Drawing Sky
         myPic.fillRect(0, 0, getWidth(), getHeight()/11);
-        
-        //RESET ROTATION
-        myPic.setTransform(old);
+
         
         
         //PLAYER

@@ -20,9 +20,6 @@ public class Drawing extends Canvas {
     private Graphics dbg;   
     Canvas can;
     
-    
-    
-    
     /*public void paint(Graphics g) {
         //JApplet jj = new JApplet();
         dbImage = j.createImage(j.getWidth(), j.getHeight());      //creates and image the size of the screen
@@ -34,6 +31,7 @@ public class Drawing extends Canvas {
     public void paint(Graphics g) {
         draw = (Graphics2D) g;        
     }
+    
     public Polygon poly(int x, int y, int t){
         Polygon p = new Polygon();
         Scaling s = new Scaling();
