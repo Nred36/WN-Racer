@@ -49,7 +49,6 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
             }
         }       
                
-        
         timer = new Timer(16, this);
         timer.setInitialDelay(100);     // probably delays the program for 0.1 seconds
         timer.start();
@@ -61,6 +60,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
                 //this will run every 2 seconds
             }
         });*/
+
 
         addKeyListener(this);
     }
