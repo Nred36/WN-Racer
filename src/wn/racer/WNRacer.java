@@ -22,6 +22,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.geom.AffineTransform;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -39,10 +40,12 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
     Image dbImage, master;
     private Graphics dbg;
     Timer timer;
+    Player player = new Player();
 
     int mX, mY, strips = 6,ticksR = 0, px = 700, py= 500;
     int [] roadi = new int[strips];
     int press[] = {0, 0, 0, 0};
+    double rotation = 0;
 
     public WNRacer() {//program name
         for(int i = 0; i < strips; i++){
@@ -51,8 +54,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
                 roadi[i]=roadi[i-1]+175;
             }
         }       
-        
-        System.out.println(py+"dd");
+               
         
         timer = new Timer(16, this);
         timer.setInitialDelay(100);     //starts timer
@@ -96,7 +98,11 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
 
     public void paintComponent(Graphics g) {
         myPic = (Graphics2D) g;      
-       
+        AffineTransform old = myPic.getTransform();
+        
+        myPic.rotate(rotation, getWidth(),getHeight()); //Rotate
+        
+        
         myPic.setColor(new Color(255,248,220)); //Sand
         myPic.fillRect(0,0,getWidth(),getHeight());
         
@@ -110,27 +116,34 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
             myPic.setColor(Color.black);
             myPic.drawPolygon(d.poly(getWidth()/2, roadi[i],1));
             if(roadi[i]<1500){                
-                roadi[i]+=roadi[i]/50;                
-            }else if(roadi[i]>1500 && ticksR>30){ //If the strip is off the screen and a new one hasnt spawned in 30 frames, spawn one
+                roadi[i]+=roadi[i]/ player.currSpeed; //Base on Player Speed          
+            }else if(roadi[i]>1500 && ticksR>player.currSpeed){ //If the strip is off the screen and a new one hasnt spawned in 30 frames, spawn one
               roadi[i]=getHeight()/11;
               ticksR=0;
             }
             if(i==0){ //Only increase the frame count on the first of the array
                 ticksR++;
             }
-        }
+        }      
+        
         
         myPic.setColor(Color.cyan); //Drawing Sky
         myPic.fillRect(0, 0, getWidth(), getHeight()/11);
+        
+        //RESET ROTATION
+        myPic.setTransform(old);
         
         
         //PLAYER
         myPic.fillRect(px, py, 60, 100);      
         
+        
             if(press[0]==1){
-                px--;
+                px--;               
+                rotation -= 0.001;
             }else if(press[1]==1){
                 px++;
+                rotation += 0.001;
             }
             if(press[2]==1){
                 py--;
@@ -155,9 +168,9 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
     @Override
      public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
-            press[0] = 1;
+            press[0] = 1;            
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            press[1] = 1;
+            press[1] = 1;            
         }
         if (press[2] == 0 && (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP)) {
             press[2] = 1;           

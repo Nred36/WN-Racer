@@ -20,9 +20,9 @@ public class Player {
     
     public Player(){
         health = 100;
-        maxSpeed = 100;
-        minSpeed = 60;
-        
+        maxSpeed = 10;
+        minSpeed = 30;
+        currSpeed = 30;
         
         
     }

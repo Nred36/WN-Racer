@@ -39,10 +39,10 @@ public class Drawing extends Canvas {
         Scaling s = new Scaling();
         
         if (t == 0){  //For the Road its self
-            p.addPoint(0,y);
+            p.addPoint(0-x/11,y);
             p.addPoint(x/3, y/11);
             p.addPoint(x - x/3, y/11);
-            p.addPoint(x, y);
+            p.addPoint(x + x/11, y);
         }else if(t == 1){ //For drawing the strips
             int w=15, h = 45;
             
