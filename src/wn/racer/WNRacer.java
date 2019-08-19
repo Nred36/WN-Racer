@@ -40,21 +40,15 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
     private Graphics dbg;
     Timer timer;
 
-    int mX, mY, strips = 6;
+    int mX, mY, strips = 6,ticksR = 0;
     int [] roadi = new int[strips];
 
     public WNRacer() {//program name
         for(int i = 0; i < strips; i++){
-            roadi[0]=87;
-            roadi[1]=207;
-            roadi[2]=357;
-            roadi[3]=567;
-            roadi[4]=737;
-            roadi[5]=1167;
-            /*roadi[5]=1156;
-            roadi[5]=1156;
-            roadi[5]=1156;
-            roadi[5]=1156;*/
+            roadi[0]= getHeight()/11;
+            if(i>0){
+                roadi[i]=roadi[i-1]+175;
+            }
         }
         
         timer = new Timer(16, this);
@@ -98,10 +92,13 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
     }
 
     public void paintComponent(Graphics g) {
-        myPic = (Graphics2D) g;        
-        Polygon p = new Polygon();
+        myPic = (Graphics2D) g;      
+       
+        myPic.setColor(new Color(255,248,220));
+        myPic.fillRect(0,0,getWidth(),getHeight());
         
-        myPic.drawPolygon(d.poly(getWidth(),getHeight(),0));
+        myPic.setColor(Color.lightGray);
+        myPic.fillPolygon(d.poly(getWidth(),getHeight(),0));
         
         
         for(int i = 0; i < strips; i++){            
@@ -109,13 +106,20 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener, Mou
             myPic.fillPolygon(d.poly(getWidth()/2, roadi[i],1));
             myPic.setColor(Color.black);
             myPic.drawPolygon(d.poly(getWidth()/2, roadi[i],1));
-            System.out.println(getHeight()/11);
-            if(roadi[i]<1300){                
-                roadi[i]+=roadi[i]/50;
-            }else{
-              roadi[i]=87;  
+            if(roadi[i]<1500){                
+                roadi[i]+=roadi[i]/50;                
+            }else if(roadi[i]>1500 && ticksR>30){
+              roadi[i]=getHeight()/11;
+              ticksR=0;
+            }
+            if(i==0){
+                ticksR++;
             }
         }
+        
+        myPic.setColor(Color.cyan);
+        myPic.fillRect(0, 0, getWidth(), getHeight()/11);
+        
     }
 
     @Override
