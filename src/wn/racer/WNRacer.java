@@ -1,28 +1,13 @@
 package wn.racer;//package name
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.awt.geom.AffineTransform;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -41,7 +26,10 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     int press[] = {0, 0, 0, 0};
     
 
-    public WNRacer() {//program name
+    /**
+     * WNRacer constructor used to make an instance of the main class
+     */
+    public WNRacer() {
         
         // Code for the road stripes
         for(int i = 0; i < strips; i++){
@@ -71,16 +59,21 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     }
 
     public static void main(String[] args) {
-        JApplet applet = new WNRacer();        //sets up the window
-        f.getContentPane().add("Center", applet);
-        applet.init();
-        f.pack();
-        f.setVisible(true); //makes it visible
+        JApplet applet = new WNRacer(); // applet is an object of the main class used to make the gui
+        f.getContentPane().add("Center", applet); // get the content pane object from the frame and add center applet
+        applet.init(); // lets the applet know that it has been initialized
+        f.pack(); // lets the window be resized
+        f.setVisible(true); // makes the window show up on the screen
         //f.setResizable(false);//makes in unsizable
-        f.setBounds(10, 10, 1879, 1002);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    //stops program if you x out the window    
+        //f.setBounds(10, 10, 1879, 1002); // sets the default size of the window
+        f.setBounds(10, 10, 900, 500); // sets the default size of the window
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// program stops running if the window is closed  
     }
 
+    /**
+     * 
+     * @param g 
+     */
     public void paint(Graphics g) {
         dbImage = createImage(getWidth(), getHeight());      //creats and image the size of the screen
         dbg = dbImage.getGraphics();        //double buffers the panel
@@ -120,16 +113,16 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         myPic.fillRect(0, 0, getWidth(), getHeight()/11);
         
         //PLAYER
-        myPic.fillRect(px, py, 60, 100);      
+        myPic.fillRect(player.posx, player.posy, 60, 100);      
         
         
         if(press[0]==1){
             // move the bike to the left     
-            System.out.println("left");
+            player.updatePosition(0, true);
         }
         else if(press[1]==1){
             // move the bike to the right
-            System.out.println("right");
+            player.updatePosition(f.getWidth(), false);
         }
         if(press[2]==1){
             player.currSpeed++;
@@ -145,11 +138,6 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         repaint();
         requestFocus();
         setFocusTraversalKeysEnabled(false);
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        //
     }
 
     @Override
@@ -179,4 +167,11 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
             press[3] = 0;
         }
     }
+    
+    @Override
+    public void keyTyped(KeyEvent e){
+        
+    }
+    
+    
 }
