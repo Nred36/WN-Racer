@@ -17,6 +17,7 @@ public class Player {
     static int posx;
     static int posy;
     static int currSpeed;
+    static int horizontalSpeed;
     static int direction; // -42 to pos 42
     
     public Player(){
@@ -24,6 +25,7 @@ public class Player {
         maxSpeed = 10;
         minSpeed = 30;
         currSpeed = 30;
+        horizontalSpeed =5;
         
         
     }
@@ -39,6 +41,32 @@ public class Player {
         
     }
     
+    /**
+     * Moves the player left and right
+     * The barrier is the "wall" that the player can't get past.
+     * isLeft is true if the player is moving left.
+     * @param barrier
+     * @param isLeft 
+     */
+    public void updatePosition(int barrier, boolean isLeft){
+        // if the player is moving left
+        if(isLeft){
+            // if the player is away from the wall
+            if(posx >= 0){
+                posx-= horizontalSpeed;
+            } 
+        }
+        // if the player is moving right
+        else if(!isLeft){
+            // if the player is away from the wall
+           if(posx <= barrier){
+                posx+= horizontalSpeed;
+            } 
+        }
+        else{
+            System.out.println("Error - updatePosition in Player");
+        }
+    }
 
 
 }
