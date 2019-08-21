@@ -30,7 +30,6 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
      * WNRacer constructor used to make an instance of the main class
      */
     public WNRacer() {
-        
         // Code for the road stripes
         for(int i = 0; i < strips; i++){
             roadi[0]= getHeight()/11;
@@ -45,17 +44,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         timer = new Timer(16, this);
         timer.setInitialDelay(100);     // probably delays the program for 0.1 seconds
         timer.start();
-        
-        // This commented out code has code where something can be executed every 2 seconds or so if wanted
-/*        Timer timer = new Timer(2000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //this will run every 2 seconds
-            }
-        });*/
 
-
-        
     }
 
     public static void main(String[] args) {
@@ -170,7 +159,6 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     
     @Override
     public void keyTyped(KeyEvent e){
-        
     }
     
     

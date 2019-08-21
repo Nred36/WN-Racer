@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package wn.racer;
 
 /**
@@ -26,8 +21,6 @@ public class Player {
         minSpeed = 30;
         currSpeed = 30;
         horizontalSpeed =5;
-        
-        
     }
     
     /**
@@ -63,10 +56,9 @@ public class Player {
                 posx+= horizontalSpeed;
             } 
         }
+        // if there is an error (should be impossible since sending boolean)
         else{
             System.out.println("Error - updatePosition in Player");
         }
     }
-
-
 }
