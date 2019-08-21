@@ -28,8 +28,8 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 public class WNRacer extends JApplet implements ActionListener, KeyListener {
-    static JFrame f = new JFrame("");
-    Drawing d = new Drawing();
+    static JFrame f = new JFrame(""); // f is the JFrame object
+    Drawing d = new Drawing(); // create a "Drawing" object
     Graphics2D myPic;
     Image dbImage, master;
     private Graphics dbg;
@@ -42,13 +42,18 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     
 
     public WNRacer() {//program name
+        
+        // Code for the road stripes
         for(int i = 0; i < strips; i++){
             roadi[0]= getHeight()/11;
             if(i>0){
                 roadi[i]=roadi[i-1]+175;
             }
         }       
-               
+        
+        addKeyListener(this);
+        
+        // Timer code for how often the code is run
         timer = new Timer(16, this);
         timer.setInitialDelay(100);     // probably delays the program for 0.1 seconds
         timer.start();
@@ -62,7 +67,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         });*/
 
 
-        addKeyListener(this);
+        
     }
 
     public static void main(String[] args) {
@@ -120,9 +125,11 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         
         if(press[0]==1){
             // move the bike to the left     
+            System.out.println("left");
         }
         else if(press[1]==1){
             // move the bike to the right
+            System.out.println("right");
         }
         if(press[2]==1){
             player.currSpeed++;

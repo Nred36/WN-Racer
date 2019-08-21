@@ -32,6 +32,9 @@ public class Drawing extends Canvas {
         draw = (Graphics2D) g;        
     }
     
+    /*
+    
+    */
     public Polygon poly(int x, int y, int t){
         Polygon p = new Polygon();
         Scaling s = new Scaling();
