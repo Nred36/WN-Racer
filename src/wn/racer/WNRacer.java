@@ -81,7 +81,11 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         myPic.fillPolygon(d.poly(getWidth(),getHeight(),0));
         
         
-        for(int i = 0; i < strips; i++){ //Road Lines
+        /**
+         * code for the road lines, 
+         * needs to be simplified and generalized
+         */
+        for(int i = 0; i < strips; i++){ 
             myPic.setColor(Color.yellow);
             myPic.fillPolygon(d.poly(getWidth()/2, roadi[i],1));
             myPic.setColor(Color.black);
@@ -95,7 +99,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
             if(i==0){ //Only increase the frame count on the first of the array
                 ticksR++;
             }
-        }      
+        }
         
         
         myPic.setColor(Color.cyan); //Drawing Sky
