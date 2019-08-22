@@ -42,7 +42,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         
         // Timer code for how often the code is run
         timer = new Timer(16, this);
-        timer.setInitialDelay(100);     // probably delays the program for 0.1 seconds
+        timer.setInitialDelay(100);// probably delays the program for 0.1 seconds
         timer.start();
 
     }
@@ -89,10 +89,15 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
             myPic.setColor(Color.yellow);
             myPic.fillPolygon(d.poly(getWidth()/2, roadi[i],1));
             myPic.setColor(Color.black);
+            
             myPic.drawPolygon(d.poly(getWidth()/2, roadi[i],1));
             if(roadi[i]<1500){                
                 roadi[i]+=roadi[i] / player.currSpeed; //Base on Player Speed          
-            }else if(roadi[i]>1500 && ticksR>player.currSpeed){ //If the strip is off the screen and a new one hasnt spawned in 30 frames, spawn one
+            
+            /**
+             * If the strip is off the screen and a new 
+             * one hasn't spawned in 30 frames, spawn one*/
+            }else if(roadi[i]>1500 && ticksR>player.currSpeed){ 
               roadi[i]=getHeight()/11;
               ticksR=0;
             }
