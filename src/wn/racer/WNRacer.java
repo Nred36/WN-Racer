@@ -4,10 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -21,7 +23,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     Timer timer;
     Player player = new Player();
 
-    int mX, mY, strips = 6,ticksR = 0, px = 900, py= 700;
+    int mX, mY, strips = 6,ticksR = 0, revolutions = 0, px = 900, py= 700;
     int [] roadi = new int[strips];
     Roadmarking[] markings = new Roadmarking[strips];
     int press[] = {0, 0, 0, 0};
@@ -42,19 +44,29 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         
         // create an array of road objects
         for(int i = 0; i < strips; i++){
+
             markings[i] = new Roadmarking(getHeight());
             if(i>0){
+                //markings[i].posy=markings[i-1].posy+175; // I think this sets the frequency for the first 5?
                 markings[i].posy=markings[i-1].posy+175; // I think this sets the frequency for the first 5?
             }
         }       
         
+
         
+ //       System.out.println("markings height ="+ markings[0].posy+"\nmarkings 1 height = "+markings[1].posy );
+                
+        for(int i = 0; i < strips; i++){
+            //markings[i] = new Roadmarking(getHeight());
+        }
+ 
         addKeyListener(this);
         
         // Timer code for how often the code is run
         timer = new Timer(16, this);
         timer.setInitialDelay(100);// probably delays the program for 0.1 seconds
         timer.start();
+
 
     }
 
@@ -123,37 +135,29 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
                 ticksR++;
             }
         }*/
+ 
+ 
         
         for(int i = 0; i < strips; i++){ 
+       //     System.out.println("Width = "+getWidth()+"\nHeight = "+getHeight());
             
-            System.out.println("Width = "+getWidth()+"\nHeight = "+getHeight());
+            // show the road markings on the screen
+            outputRoadmarkings(markings[i]);
             
-            // Make the yellow road markings
-            myPic.setColor(Color.yellow);
-            myPic.fillPolygon(d.poly(markings[i].posx, markings[i].posy,1));
-            myPic.fillPolygon(d.poly(getWidth()/2, markings[i].posy,1));
+            // update the position of the marking
+            markings[i].updatePosition(player, getWidth(), getHeight());
             
-            // outline the yellow road markings
-            myPic.setColor(Color.black); // outline of the roadmarkingss
-            myPic.drawPolygon(d.poly(markings[i].posx, markings[i].posy,1));
-    
+            ticksR++;
             
-            // update the position if at the bottom of the screen?? (ask nathan)
-            if(markings[i].posy<1500){ // Where does 1500 comes from? When I change it it does not work?
-                markings[i].updatePosition(player, getWidth(), getHeight());
-            }
-            // If the strip is off the screen and a new 
-            // one hasn't spawned in 30 frames, spawn one
-            else if(markings[i].posy>1500 && ticksR>player.currSpeed){ 
-              //markings[i].posy=getHeight()/11;
-              markings[i] = new Roadmarking(getHeight()); // replace with new marking object
-              ticksR=0;
-            }
-            if(i==0){ //Only increase the frame count on the first of the array
-                ticksR++;
+            // if the mrking is at the bottom of the screen, create a new object
+            if(markings[i].posy > getHeight() && ticksR >= 88 ){
+                
+                markings[i] = new Roadmarking(getHeight());
+                System.out.println("ticksR = "+ticksR);
+                ticksR = 0;
             }
         }
-        
+
         
         myPic.setColor(Color.cyan); //Drawing Sky
         myPic.fillRect(0, 0, getWidth(), getHeight()/11);
@@ -176,6 +180,22 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         if(press[3]==1){
             player.currSpeed--;
         }
+
+    }
+    
+    /**
+     * This will output the road markings
+     * @param marking 
+     */
+    public void outputRoadmarkings(Roadmarking marking){
+        
+        // Make the yellow road markings
+        myPic.setColor(Color.yellow);
+        myPic.fillPolygon(d.poly(marking.posx, marking.posy,1));
+
+        // outline the yellow road markings
+        myPic.setColor(Color.black); // outline of the roadmarkingss
+        myPic.drawPolygon(d.poly(marking.posx, marking.posy,1));
 
     }
 
