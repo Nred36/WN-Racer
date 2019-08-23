@@ -17,7 +17,9 @@ public class Thing {
     
     public void updatePosition(Player player, int screenWidth, int screenHeight){
         
-        posy += posy / player.currSpeed; // advances the thing downard (based on speed
+        //posy += posy / player.currSpeed; // advances the thing downard (based on speed
+        
+        posy += posy/player.currSpeed; // advances the thing downard (based on speed
         
         posx = screenWidth/2;
  
