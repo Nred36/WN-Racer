@@ -8,7 +8,8 @@ public class Enemy extends Thing{
     
     static int speed = 20;
     
-    public Enemy(){
+    public Enemy(int screenHeight) {
+        super(screenHeight);
         posx = 0;
         posy = 0;
     }

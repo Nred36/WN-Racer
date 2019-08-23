@@ -23,6 +23,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
 
     int mX, mY, strips = 6,ticksR = 0, px = 900, py= 700;
     int [] roadi = new int[strips];
+    Roadmarking[] markings = new Roadmarking[strips];
     int press[] = {0, 0, 0, 0};
     
 
@@ -31,12 +32,22 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
      */
     public WNRacer() {
         // Code for the road stripes
-        for(int i = 0; i < strips; i++){
-            roadi[0]= getHeight()/11;
+/*        for(int i = 0; i < strips; i++){
+            roadi[0]= getHeight()/11; // sets each roadi to the top of the road
             if(i>0){
-                roadi[i]=roadi[i-1]+175;
+//                roadi[i]=roadi[i-1]+175; // I think this sets the frequency for the first 5?
+                roadi[i]=roadi[i-1]+1000; // arbitrarily changed to 1000
+            }
+        }     */  
+        
+        // create an array of road objects
+        for(int i = 0; i < strips; i++){
+            markings[i] = new Roadmarking(getHeight());
+            if(i>0){
+                markings[i].posy=markings[i-1].posy+175; // I think this sets the frequency for the first 5?
             }
         }       
+        
         
         addKeyListener(this);
         
@@ -85,20 +96,57 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
          * code for the road lines, 
          * needs to be simplified and generalized
          */
-        for(int i = 0; i < strips; i++){ 
+ /*       for(int i = 0; i < strips; i++){ 
+            
+            System.out.println("Width = "+getWidth()+"\nHeight = "+getHeight());
+            
+            // Make the yellow road markings
             myPic.setColor(Color.yellow);
             myPic.fillPolygon(d.poly(getWidth()/2, roadi[i],1));
-            myPic.setColor(Color.black);
             
+            // outline the yellow road markings
+            myPic.setColor(Color.black); // outline of the roadmarkingss
             myPic.drawPolygon(d.poly(getWidth()/2, roadi[i],1));
-            if(roadi[i]<1500){                
-                roadi[i]+=roadi[i] / player.currSpeed; //Base on Player Speed          
             
-            /**
-             * If the strip is off the screen and a new 
-             * one hasn't spawned in 30 frames, spawn one*/
-            }else if(roadi[i]>1500 && ticksR>player.currSpeed){ 
+            // if branches 
+            if(roadi[i]<1500){ // Where does 1500 comes from? When I change it it does not work?
+            //if(roadi[i] < getHeight()){
+                roadi[i]+=roadi[i] / player.currSpeed; //Base on Player Speed          
+            }
+            // If the strip is off the screen and a new 
+            // one hasn't spawned in 30 frames, spawn one
+            else if(roadi[i]>1500 && ticksR>player.currSpeed){ 
               roadi[i]=getHeight()/11;
+              ticksR=0;
+            }
+            if(i==0){ //Only increase the frame count on the first of the array
+                ticksR++;
+            }
+        }*/
+        
+        for(int i = 0; i < strips; i++){ 
+            
+            System.out.println("Width = "+getWidth()+"\nHeight = "+getHeight());
+            
+            // Make the yellow road markings
+            myPic.setColor(Color.yellow);
+            myPic.fillPolygon(d.poly(markings[i].posx, markings[i].posy,1));
+            myPic.fillPolygon(d.poly(getWidth()/2, markings[i].posy,1));
+            
+            // outline the yellow road markings
+            myPic.setColor(Color.black); // outline of the roadmarkingss
+            myPic.drawPolygon(d.poly(markings[i].posx, markings[i].posy,1));
+    
+            
+            // update the position if at the bottom of the screen?? (ask nathan)
+            if(markings[i].posy<1500){ // Where does 1500 comes from? When I change it it does not work?
+                markings[i].updatePosition(player, getWidth(), getHeight());
+            }
+            // If the strip is off the screen and a new 
+            // one hasn't spawned in 30 frames, spawn one
+            else if(markings[i].posy>1500 && ticksR>player.currSpeed){ 
+              //markings[i].posy=getHeight()/11;
+              markings[i] = new Roadmarking(getHeight()); // replace with new marking object
               ticksR=0;
             }
             if(i==0){ //Only increase the frame count on the first of the array

@@ -10,11 +10,11 @@ package wn.racer;
  * @author Will Pringle
  */
 public class Roadmarking extends Thing{
-    
-    public Roadmarking(){
-        // make the posx in the center of the screen ALWAYS
-        posy = 0; // the position will always start at the top of the screen
-        
+
+    public Roadmarking(int screenHeight) {
+        super(screenHeight);
     }
+
+
     
 }
