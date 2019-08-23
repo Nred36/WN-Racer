@@ -49,6 +49,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
             if(i>0){
                 //markings[i].posy=markings[i-1].posy+175; // I think this sets the frequency for the first 5?
                 markings[i].posy=markings[i-1].posy+175; // I think this sets the frequency for the first 5?
+                markings[i].posx = markings[i].posx = getWidth()/2;
             }
         }       
         
