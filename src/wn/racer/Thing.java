@@ -21,7 +21,7 @@ public class Thing {
         
         posy += posy/player.currSpeed; // advances the thing downard (based on speed
         
-        
+        posx = screenWidth/2;
  
         
       /*  posy += posy/player.currSpeed;
