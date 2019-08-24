@@ -11,17 +11,30 @@ public class Thing {
     static int sizex;
     static int sizey;
     static int width;
+    
+    /**
+     * Spawns the thing at the horizon. Further spawn actions should be 
+     * done in the subclass' constructor. 
+     * @param screenHeight
+     * @param screenWidth 
+     */
     Thing(int screenHeight){
         posy = screenHeight / 11; // spawn the thing at the horizon
     }
     
+    /**
+     * Changes the position on screen of the player
+     * @param player
+     * @param screenWidth
+     * @param screenHeight 
+     */
     public void updatePosition(Player player, int screenWidth, int screenHeight){
         
         //posy += posy / player.currSpeed; // advances the thing downard (based on speed
         
         posy += posy/player.currSpeed; // advances the thing downard (based on speed
         
-        posx = screenWidth/2;
+        
  
         
       /*  posy += posy/player.currSpeed;

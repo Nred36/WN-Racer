@@ -13,7 +13,7 @@ public class Tumbleweed extends Thing{
     
     static int horizontalSpeed = 20;
     
-    Tumbleweed(int screenHeight) {
+    Tumbleweed(int screenHeight, int screenWidth) {
         super(screenHeight);
         
     } 

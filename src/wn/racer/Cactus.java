@@ -11,7 +11,7 @@ package wn.racer;
  */
 public class Cactus extends Thing{
     
-    Cactus(int screenHeight) {
+    Cactus(int screenHeight, int screenWidth) {
         super(screenHeight);
         
     }

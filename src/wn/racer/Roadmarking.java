@@ -11,8 +11,11 @@ package wn.racer;
  */
 public class Roadmarking extends Thing{
 
-    public Roadmarking(int screenHeight) {
+    public Roadmarking(int screenHeight, int screenWidth) {
         super(screenHeight);
+        
+        // place each marking in the horizontal center of the screen
+        posx = screenWidth/2;
     }
 
 

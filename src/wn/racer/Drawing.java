@@ -32,12 +32,15 @@ public class Drawing extends Canvas {
         draw = (Graphics2D) g;        
     }
     
-    /*
-    
-    */
+    /**
+     * creates a polygon object that looks faux 3d
+     * @param x // ???
+     * @param y // ???
+     * @param t // type, 1 for road, 2 for road marking
+     * @return polygon object with the details given
+     */
     public Polygon poly(int x, int y, int t){
         Polygon p = new Polygon();
-        Scaling s = new Scaling();
         
         if (t == 0){  //For the Road its self
             p.addPoint(0-x/11,y);
@@ -47,8 +50,8 @@ public class Drawing extends Canvas {
         }else if(t == 1){ //For drawing the strips
             int w=15, h = 45;
             
-            w = s.getS(y);
-            h =(int)(s.getS(y)*2.5);
+            w = getS(y);
+            h =(int)(getS(y)*2.5);
             
             x= x - (w/2);
             y = y - (h/2);
@@ -60,4 +63,15 @@ public class Drawing extends Canvas {
         
         return p;
     }
+    
+    /**
+     * Gives the width of the thing
+     * taken from the scaling class
+     * @param heightOnScreen
+     * @return width of the object
+     */
+    public int getS(int heightOnScreen){
+        int width = ((heightOnScreen-60) *30)/421;
+        return width;
+    }   
 }

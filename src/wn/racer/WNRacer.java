@@ -4,12 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -45,7 +43,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         // create an array of road objects
         for(int i = 0; i < strips; i++){
 
-            markings[i] = new Roadmarking(getHeight());
+            markings[i] = new Roadmarking(getHeight(), getWidth());
             if(i>0){
                 //markings[i].posy=markings[i-1].posy+175; // I think this sets the frequency for the first 5?
                 markings[i].posy=markings[i-1].posy+175; // I think this sets the frequency for the first 5?
@@ -138,9 +136,8 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         }*/
  
  
-        
+        // Output the roadmarkings 
         for(int i = 0; i < strips; i++){ 
-       //     System.out.println("Width = "+getWidth()+"\nHeight = "+getHeight());
             
             // show the road markings on the screen
             outputRoadmarkings(markings[i]);
@@ -153,7 +150,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
             // if the mrking is at the bottom of the screen, create a new object
             if(markings[i].posy > getHeight() && ticksR >= 88 ){
                 
-                markings[i] = new Roadmarking(getHeight());
+                markings[i] = new Roadmarking(getHeight(), getWidth());
                 System.out.println("ticksR = "+ticksR);
                 ticksR = 0;
             }
