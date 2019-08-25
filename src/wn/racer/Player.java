@@ -15,10 +15,12 @@ public class Player {
     static int horizontalSpeed;
     static Image[] sprites; // these would be the three images of the car (or the two)
     
-    public Player(){
+    public Player(int initialHoeizontalPosition){
         health = 100;
         currSpeed = 30;
         horizontalSpeed = 5;
+        posx = initialHoeizontalPosition;
+        System.out.println("thing -= "+initialHoeizontalPosition);
         /**
          * WIP - TO DO
          * 
@@ -26,8 +28,7 @@ public class Player {
          * this array would have three images. one of the car from the back, one
          * from the left side at a 20ish degree angle and one at the right mirrored.
          * 
-         * spawn the player in the horizontal cetre of the screen
-         * 
+         * make the player spawn in the horizontal middle
          */
     }
     

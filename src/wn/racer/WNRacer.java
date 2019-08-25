@@ -19,7 +19,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     Image dbImage, master;
     private Graphics dbg;
     Timer timer;
-    Player player = new Player();
+    Player player = new Player(getWidth()/2); // BAD CODE - getWidth() always returns 0 since not created yet
 
     int mX, mY, strips = 6,ticksR = 0, revolutions = 0, px = 900, py= 700;
     int [] roadi = new int[strips];
