@@ -19,7 +19,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     Image dbImage, master;
     private Graphics dbg;
     Timer timer;
-    Player player = new Player(getWidth()/2); // BAD CODE - getWidth() always returns 0 since not created yet
+    Player player = new Player(/*getWidth()/2*/400); // BAD CODE - getWidth() always returns 0 since not created yet
 
     int mX, mY, strips = 6,ticksR = 0, revolutions = 0, px = 900, py= 700;
     int [] roadi = new int[strips];
@@ -43,11 +43,13 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         // create an array of road objects
         for(int i = 0; i < strips; i++){
 
-            markings[i] = new Roadmarking(getHeight(), getWidth());
+            //markings[i] = new Roadmarking(getHeight(), getWidth()); //!! getheight and getwidth are 0
+            markings[i] = new Roadmarking(-1000, -1000); //Temp code
             if(i>0){
                 //markings[i].posy=markings[i-1].posy+175; // I think this sets the frequency for the first 5?
                 markings[i].posy=markings[i-1].posy+175; // I think this sets the frequency for the first 5?
-                markings[i].posx = markings[i].posx = getWidth()/2;
+                //markings[i].posx = getWidth()/2;
+                markings[i].posx = -100; // getWidth() returns 0 since applet not created yet or something? ask nathan. Anyways sending -100 instead
             }
         }       
         
@@ -162,16 +164,17 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         
         //PLAYER
         player.updateVerticalPosition(getHeight()); // update the vertical position
+        player.updateHorizontalPosition(f.getWidth(), false, false);
         myPic.fillRect(player.posx, player.posy, 60, 100); // fill the reactanle (temp code)
         
         
         if(press[0]==1){
             // move the bike to the left     
-            player.updateHorizontalPosition(0, true);
+            player.updateHorizontalPosition(f.getWidth(), true, true);
         }
         else if(press[1]==1){
             // move the bike to the right
-            player.updateHorizontalPosition(f.getWidth(), false);
+            player.updateHorizontalPosition(f.getWidth(), false, true);
         }
         if(press[2]==1){
             player.currSpeed++;
