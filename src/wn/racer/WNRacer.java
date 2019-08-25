@@ -21,7 +21,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     Timer timer;
     Player player = new Player(/*getWidth()/2*/400); // BAD CODE - getWidth() always returns 0 since not created yet
 
-    int mX, mY, strips = 6,ticksR = 0, revolutions = 0, px = 900, py= 700;
+    int mX, mY, strips = 2,ticksR = 0, revolutions = 0, px = 900, py= 700;
     int [] roadi = new int[strips];
     Roadmarking[] markings = new Roadmarking[strips];
     int press[] = {0, 0, 0, 0};
@@ -177,10 +177,12 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
             player.updateHorizontalPosition(f.getWidth(), false, true);
         }
         if(press[2]==1){
-            player.currSpeed++;
+            //player.currSpeed++;
+            player.changeSpeed(1, getHeight());
         }
         if(press[3]==1){
-            player.currSpeed--;
+            //player.currSpeed--;
+            player.changeSpeed(-1, getHeight());
         }
 
     }

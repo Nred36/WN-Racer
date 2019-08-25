@@ -14,14 +14,16 @@ public class Player {
     static int posy;
     static double ratioy = 8.0/11.0; // vertical ratio on the screen 
     static int currSpeed;
-    static double ratioHorizontalSpeed = 2.5/100.0;
+    static double ratioSpeed;
+    static double ratioHorizontalSpeed = 2.5/10000.0;
     static Image[] sprites; // these would be the three images of the car (or the two)
     
     public Player(int initialHoeizontalPosition){
         health = 100;
-        currSpeed = 30;
+        currSpeed = 3;
         posx = initialHoeizontalPosition;
-        System.out.println("thing -= "+initialHoeizontalPosition);
+        ratioSpeed = 1.0/10000.0;
+        System.out.println("thing = "+initialHoeizontalPosition);
         /**
          * WIP - TO DO
          * 
@@ -49,14 +51,14 @@ public class Player {
             if(isLeft){
                 // if the player is away from the wall
                 if(ratiox >= 0){
-                    ratiox-= ((double) ratioHorizontalSpeed*screenWidth) / 1000.0;
+                    ratiox-= ((double) ratioHorizontalSpeed*screenWidth);
                 } 
             }
             // if the player is moving right
             else if(!isLeft){
                 // if the player is away from the wall
                if(ratiox <= 1.0){
-                    ratiox+= ((double) ratioHorizontalSpeed*screenWidth) / 1000.0;
+                    ratiox+= ((double) ratioHorizontalSpeed*screenWidth);
                 } 
             }
         }
@@ -66,6 +68,17 @@ public class Player {
         
     }
     
+    /**
+     * Increases or decreases the speed.
+     * The factor is by how much of an increase
+     * @param factor
+     * @param screenHeight 
+     */
+    public void changeSpeed(int factor, int screenHeight){
+        ratioSpeed = ratioSpeed + 1.0/1000.0 * factor;
+        currSpeed = (int) (ratioSpeed * screenHeight);
+    }
+        
     /**
      * Keeps the player in the same vertical position despite resizing the
      * screen.

@@ -32,10 +32,8 @@ public class Thing {
         
         //posy += posy / player.currSpeed; // advances the thing downard (based on speed
         
-        posy += posy/player.currSpeed; // advances the thing downard (based on speed
-        
-        
- 
+        posy += (int) (double)(player.currSpeed + (posy)/100); // advances the thing downard (based on speed
+         
         
       /*  posy += posy/player.currSpeed;
         sizex = ((posy-60) * 30)/421 * widthDiff;
