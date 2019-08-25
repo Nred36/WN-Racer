@@ -161,16 +161,17 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
         myPic.fillRect(0, 0, getWidth(), getHeight()/11);
         
         //PLAYER
-        myPic.fillRect(player.posx, player.posy, 60, 100);      
+        player.updateVerticalPosition(getHeight()); // update the vertical position
+        myPic.fillRect(player.posx, player.posy, 60, 100); // fill the reactanle (temp code)
         
         
         if(press[0]==1){
             // move the bike to the left     
-            player.updatePosition(0, true);
+            player.updateHorizontalPosition(0, true);
         }
         else if(press[1]==1){
             // move the bike to the right
-            player.updatePosition(f.getWidth(), false);
+            player.updateHorizontalPosition(f.getWidth(), false);
         }
         if(press[2]==1){
             player.currSpeed++;
