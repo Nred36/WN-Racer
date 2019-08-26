@@ -15,14 +15,14 @@ public class Player {
     static double ratioy = 8.0/11.0; // vertical ratio on the screen 
     static int currSpeed;
     static double ratioSpeed;
-    static double ratioHorizontalSpeed = 2.5/10000.0;
+    static double ratioHorizontalSpeed = 1/100000.0;
     static Image[] sprites; // these would be the three images of the car (or the two)
     
     public Player(int initialHoeizontalPosition){
         health = 100;
         currSpeed = 3;
         posx = initialHoeizontalPosition;
-        ratioSpeed = 1.0/10000.0;
+        ratioSpeed = 1.0/10.0;
         System.out.println("thing = "+initialHoeizontalPosition);
         /**
          * WIP - TO DO
@@ -94,10 +94,10 @@ public class Player {
      * @return 
      */
     public Image getSprite(int screenWidth){
+        //TO DO 
         
         
-        
-        return sprites[2];
+        return sprites[2]; // return value invalid, just put here so no error message
     }
     
 }
