@@ -22,7 +22,7 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     Player player = new Player(/*getWidth()/2*/400); // BAD CODE - getWidth() always returns 0 since not created yet
 
     int strips = 6,ticksR = 0;
-    int [] roadi = new int[strips];
+//    int [] roadi = new int[strips];
     Roadmarking[] markings = new Roadmarking[strips];
     int press[] = {0, 0, 0, 0};
     
