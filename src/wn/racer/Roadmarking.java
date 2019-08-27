@@ -9,17 +9,19 @@ package wn.racer;
  *
  * @author Will Pringle
  */
-public class Roadmarking extends Thing{
+public class Roadmarking extends Thing {
 
-    public Roadmarking(int screenHeight, int screenWidth) {
+    public Roadmarking(int screenWidth, int screenHeight) {
         super(screenHeight);
-        
+
         // place each marking in the horizontal center of the screen
-        posx = screenWidth/2;
-        
-        System.out.println("Roadmarking born (called in roadmarking constructor)");
+        posx = screenWidth / 2;
+
+        //System.out.println("Roadmarking born (called in roadmarking constructor)");
     }
 
+    public void updatePosition(int screenWidth) {
+        posx = screenWidth / 2;
+    }
 
-    
 }

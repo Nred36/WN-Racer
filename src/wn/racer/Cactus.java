@@ -9,11 +9,11 @@ package wn.racer;
  *
  * @author Will Pringle
  */
-public class Cactus extends Thing{
-    
+public class Cactus extends Thing {
+
     Cactus(int screenHeight, int screenWidth) {
         super(screenHeight);
-        
+
     }
-    
+
 }

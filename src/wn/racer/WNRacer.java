@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 public class WNRacer extends JApplet implements ActionListener, KeyListener {
+
     static JFrame f = new JFrame(""); // f is the JFrame object
     Drawing d = new Drawing(); // create a "Drawing" object
     Graphics2D myPic;
@@ -21,11 +22,10 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     Timer timer;
     Player player = new Player(/*getWidth()/2*/400); // BAD CODE - getWidth() always returns 0 since not created yet
 
-    int strips = 6,ticksR = 0;
+    int strips = 2, ticksR = 0;
 //    int [] roadi = new int[strips];
     Roadmarking[] markings = new Roadmarking[strips];
     int press[] = {0, 0, 0, 0};
-    
 
     /**
      * WNRacer constructor used to make an instance of the main class
@@ -38,44 +38,41 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
 //                roadi[i]=roadi[i-1]+175; // I think this sets the frequency for the first 5?
                 roadi[i]=roadi[i-1]+1000; // arbitrarily changed to 1000
             }
-        }     */  
-        
+        }     */
+
         // create an array of road objects
-        for(int i = 0; i < strips; i++){
+        for (int i = 0; i < strips; i++) {
 
             //markings[i] = new Roadmarking(getHeight(), getWidth()); //!! getheight and getwidth are 0
-            markings[i] = new Roadmarking(-1000, -1000); //Temp code, arbitrary number
-            if(i>0){
+            markings[i] = new Roadmarking(900, 500); //Temp code, arbitrary number
+            if (i > 0) {
                 //markings[i].posy=markings[i-1].posy+175; // I think this sets the frequency for the first 5?
-                markings[i].posy=markings[i-1].posy+175; // I think this sets the frequency for the first 5?
+                markings[i].posy = markings[i - 1].posy + 75; // I think this sets the frequency for the first 5?
                 //markings[i].posx = getWidth()/2;
-                markings[i].posx = -100; // getWidth() returns 0 since applet not created yet or something? ask nathan. Anyways sending -100 instead
+                //markings[i].posx = -100; // getWidth() returns 0 since applet not created yet or something? ask nathan. Anyways sending -100 instead                
             }
-        }  
-        
+        }
 
-        
- //       System.out.println("markings height ="+ markings[0].posy+"\nmarkings 1 height = "+markings[1].posy );
-                
-        for(int i = 0; i < strips; i++){
+        //       System.out.println("markings height ="+ markings[0].posy+"\nmarkings 1 height = "+markings[1].posy );
+        for (int i = 0; i < strips; i++) {
             //markings[i] = new Roadmarking(getHeight());
         }
- 
+
         addKeyListener(this);
-        
+
         // Timer code for how often the code is run
         timer = new Timer(16, this);
         timer.setInitialDelay(100);// probably delays the program for 0.1 seconds
         timer.start();
 
-
     }
 
     /**
-     * Main function for this program. Sets up the window and creates an instance
-     * of the main class (applet) to be used to perform stuff on regarding the 
-     * window
-     * @param args 
+     * Main function for this program. Sets up the window and creates an
+     * instance of the main class (applet) to be used to perform stuff on
+     * regarding the window
+     *
+     * @param args
      */
     public static void main(String[] args) {
         JApplet applet = new WNRacer(); // applet is an object of the main class used to make the gui
@@ -90,8 +87,8 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     }
 
     /**
-     * 
-     * @param g 
+     *
+     * @param g
      */
     public void paint(Graphics g) {
         dbImage = createImage(getWidth(), getHeight());      //creats and image the size of the screen
@@ -101,21 +98,18 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     }
 
     public void paintComponent(Graphics g) {
-        myPic = (Graphics2D) g;      
+        myPic = (Graphics2D) g;
 
-        
-        myPic.setColor(new Color(255,248,220)); //Sand
-        myPic.fillRect(0,0,getWidth(),getHeight());
-        
+        myPic.setColor(new Color(255, 248, 220)); //Sand
+        myPic.fillRect(0, 0, getWidth(), getHeight());
+
         myPic.setColor(Color.lightGray); //Road
-        myPic.fillPolygon(d.poly(getWidth(),getHeight(),0));
-        
-        
+        myPic.fillPolygon(d.poly(getWidth(), getHeight(), 0));
+
         /**
-         * code for the road lines, 
-         * needs to be simplified and generalized
+         * code for the road lines, needs to be simplified and generalized
          */
- /*       for(int i = 0; i < strips; i++){ 
+        /*       for(int i = 0; i < strips; i++){ 
             
             System.out.println("Width = "+getWidth()+"\nHeight = "+getHeight());
             
@@ -142,74 +136,84 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
                 ticksR++;
             }
         }*/
-        
-        
+        int spawn = 9999;
+
         // Output the roadmarkings 
-        for(int i = 0; i < strips; i++){ 
-            
+        for (int i = 0; i < strips; i++) {
+
             // show the road markings on the screen
             outputRoadmarkings(markings[i]);
-            
-            // update the position of the marking
-            markings[i].updatePosition(player, getWidth(), getHeight());
-            
-            ticksR++;
 
+            // update the position of the marking            
+            markings[i].updatePosition(player, getWidth(), getHeight());
+            markings[i].updatePosition(getWidth());
+
+            System.out.println(markings[i].posy + " i: " + i + " ticks: " + ticksR + " sp: " + player.currSpeed);
             // if the mrking is at the bottom of the screen and 88 ticks have passed, create a new object
-            if(markings[i].posy > getHeight() && ticksR >= 88 ){ //WHY after 88 ticks? this should be dynamic
-                
-                markings[i] = new Roadmarking(getHeight(), getWidth());
-                ticksR = 0;
-                
-                System.out.println("NEW ROADMARKING SPAWNED");
+
+            if (markings[i].posy >= getHeight() + getHeight() / 10 && spawn == 9999) {
+                spawn = i;
+                System.out.println("qwe");
             }
+
         }
-        
-        
+        ticksR++;
+
+        if (spawn != 9999 && ticksR > 44) { //WHY after 88 ticks? this should be dynamic                
+            //markings[i] = new Roadmarking(getWidth(), getHeight());
+            markings[spawn] = new Roadmarking(getWidth(), getHeight());
+            ticksR = 0;
+            System.out.println("NEW ROADMARKING SPAWNED: " + spawn);
+        }
+
         // Drawing the sky
         myPic.setColor(Color.cyan); //Drawing Sky
-        myPic.fillRect(0, 0, getWidth(), getHeight()/11);
-        
+        myPic.fillRect(0, 0, getWidth(), getHeight() / 11);
+
         // Drawing the player
         player.updateVerticalPosition(getHeight()); // update the vertical position
         player.updateHorizontalPosition(f.getWidth(), false, false);
         myPic.fillRect(player.posx, player.posy, 60, 100); // fill the reactanle (temp code)
-        
+
         // If strufture for taking in movements on the keyboard (changing speed, moving side to side)
-        if(press[0]==1){
+        if (press[0] == 1) {
             // move the bike to the left     
             player.updateHorizontalPosition(f.getWidth(), true, true);
-        }
-        else if(press[1]==1){
+        } else if (press[1] == 1) {
             // move the bike to the right
             player.updateHorizontalPosition(f.getWidth(), false, true);
         }
-        if(press[2]==1){
+        if (press[2] == 1) {
             //player.currSpeed++;
             player.changeSpeed(1, getHeight());
-            System.out.println("speed is = "+player.currSpeed+"\nrelative speed is "+player.ratioSpeed);
+            System.out.println("speed is = " + player.currSpeed + "\nrelative speed is " + player.ratioSpeed);
         }
-        if(press[3]==1){
+        if (press[3] == 1) {
             //player.currSpeed--;
-            player.changeSpeed(-1, getHeight());
-            System.out.println("speed is = "+player.currSpeed+"\nrelative speed is "+player.ratioSpeed);
+            if (player.currSpeed > 0) {
+                player.changeSpeed(-1, getHeight());
+                System.out.println("speed is = " + player.currSpeed + "\nrelative speed is " + player.ratioSpeed);
+            } else {
+                markings[0].posy = 300;
+            }
         }
 
     }
-    
+
     /**
      * This will output the road markings
-     * @param marking 
+     *
+     * @param marking
      */
-    public void outputRoadmarkings(Roadmarking marking){
-        
+    public void outputRoadmarkings(Roadmarking marking) {
+
         // Make the yellow road markings
         myPic.setColor(Color.yellow);
-        myPic.fillPolygon(d.poly(marking.posx, marking.posy,1));
+        myPic.fillPolygon(d.poly(marking.posx, marking.posy, 1));
 
         // outline the yellow road markings
         myPic.setColor(Color.black); // outline of the roadmarkingss
-        myPic.drawPolygon(d.poly(marking.posx, marking.posy,1));
+        myPic.drawPolygon(d.poly(marking.posx, marking.posy, 1));
 
     }
 
@@ -221,18 +225,18 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
     }
 
     @Override
-     public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
-            press[0] = 1;            
+            press[0] = 1;
         } else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            press[1] = 1;            
+            press[1] = 1;
         }
         if (press[2] == 0 && (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP)) {
-            press[2] = 1;           
+            press[2] = 1;
         } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
             press[3] = 1;
-        } 
-        }    
+        }
+    }
 
     @Override
     public void keyReleased(KeyEvent e) {
@@ -242,15 +246,14 @@ public class WNRacer extends JApplet implements ActionListener, KeyListener {
             press[1] = 0;
         }
         if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
-            press[2] = 0;            
-        }else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
+            press[2] = 0;
+        } else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
             press[3] = 0;
         }
     }
-    
+
     @Override
-    public void keyTyped(KeyEvent e){
+    public void keyTyped(KeyEvent e) {
     }
-    
-    
+
 }

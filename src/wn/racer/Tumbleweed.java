@@ -9,28 +9,28 @@ package wn.racer;
  *
  * @author Will Pringle
  */
-public class Tumbleweed extends Thing{
-    
+public class Tumbleweed extends Thing {
+
     static int horizontalSpeed = 20;
-    
+
     Tumbleweed(int screenHeight, int screenWidth) {
         super(screenHeight);
-        
-    } 
-    
-    
+
+    }
+
     /**
-     * This function updates the position of the tumbleweed. The position
-     * is updated to move to either the right or the left. If 0 is send, the 
-     * tumbleweed will move to the right. 0 means move to the right, 1 means left
-     * @param moveLeft 
+     * This function updates the position of the tumbleweed. The position is
+     * updated to move to either the right or the left. If 0 is send, the
+     * tumbleweed will move to the right. 0 means move to the right, 1 means
+     * left
+     *
+     * @param moveLeft
      */
-    public void updatePositionAgain(boolean moveLeft){
+    public void updatePositionAgain(boolean moveLeft) {
         // move horizontally to one direction
-        if(moveLeft){
+        if (moveLeft) {
             posx--;
-        }
-        else{
+        } else {
             posx++;
         }
     }
